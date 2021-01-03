@@ -8,11 +8,16 @@
 <body>
     <h1>DCC138 Exemplo01</h1>
     <canvas></canvas>
-    <p>por Matheus Brinati Altomar</p>
+    <p>por Matheus Brinati Altomar (2021)</p>
     <script>
         let canvas = document.querySelector("canvas");
+        let contexto = canvas.getContext("2d");
         canvas.width = 640;
         canvas.height = 480;
+
+        contexto.fillStyle = "cyan";
+        contexto.fillRect(0, 0, canvas.width, canvas.height);
+
     </script>
 </body>
 </html>
