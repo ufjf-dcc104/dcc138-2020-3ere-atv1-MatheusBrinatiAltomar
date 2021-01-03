@@ -32,6 +32,10 @@
             x = x + 200*Math.tan(t/200)*deltaTime;
             y = y + 100*Math.cos(t/200)*deltaTime;
             
+            if(x > canvas.width || x < 0)
+                x = 100;
+            if(y > canvas.height || y < 0)
+                y = 150;
 
             //Desenha Elementos
             contexto.fillStyle = "white";
