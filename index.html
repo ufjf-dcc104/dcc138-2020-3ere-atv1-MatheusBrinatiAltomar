@@ -15,10 +15,14 @@
         canvas.width = 640;
         canvas.height = 480;
         let x = 100;
-        desenha();
+        let t0;
+        let deltaTime;
+        requestAnimationFrame(desenha);
         
-        function desenha()
+        function desenha(t)
         {
+            t0 = t0 ?? t;
+            dt = (t - t0)/1000;
             //Desenha Fundo
             contexto.fillStyle = "cyan";
             contexto.fillRect(0, 0, canvas.width, canvas.height);
@@ -26,6 +30,9 @@
             //Desenha Elementos
             contexto.fillStyle = "white";
             contexto.fillRect(x, 150, 20, 20);
+
+            requestAnimationFrame(desenha);
+            t0 = t;
         }
         
 
