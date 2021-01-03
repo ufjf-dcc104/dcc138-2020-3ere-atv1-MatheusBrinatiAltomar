@@ -29,8 +29,9 @@
             contexto.fillRect(0, 0, canvas.width, canvas.height);
 
             //Atualiza estado
-            x = x + 10*deltaTime;
-            y = y + 20*Math.cos(t/200)*deltaTime;
+            x = x + 200*Math.tan(t/200)*deltaTime;
+            y = y + 100*Math.cos(t/200)*deltaTime;
+            
 
             //Desenha Elementos
             contexto.fillStyle = "white";
