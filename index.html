@@ -16,8 +16,10 @@
         canvas.height = 480;
         let x = 100;
         let velX = 0;
+        let aceleracaoX = 0;
         let y = 150;
         let velY = 0;
+        let aceleracaoY = 0;
         const velocidade = 100;
         let t0;
         let deltaTime;
@@ -32,7 +34,10 @@
             contexto.fillRect(0, 0, canvas.width, canvas.height);
 
             //Atualiza dinâmica dos estado
+            velX = velX + aceleracaoX*deltaTime;
             x = x + velX*deltaTime;
+            
+            velY = velY + aceleracaoY*deltaTime;
             y = y + velY*deltaTime;
             
             if(x > canvas.width || x < 0)
@@ -57,16 +62,16 @@
             {
                 //Adiciona controle de velocidades 
                 case "ArrowUp":
-                    velY = -velocidade;
+                    aceleracaoY = -velocidade;
                     break;
                 case "ArrowDown":
-                    velY = +velocidade;
+                    aceleracaoY = +velocidade;
                     break;
                 case "ArrowLeft":
-                    velX = -velocidade;
+                    aceleracaoX = -velocidade;
                     break;
                 case "ArrowRight":
-                    velX = +velocidade;
+                    aceleracaoX = +velocidade;
                     break;
             }
         }
@@ -78,15 +83,19 @@
                 //Adiciona controle de velocidades 
                 case "ArrowUp":
                     velY = 0;
+                    aceleracaoY = 0;
                     break;
                 case "ArrowDown":
                     velY = 0;
+                    aceleracaoY = 0;
                     break;
                 case "ArrowLeft":
                     velX = 0;
+                    aceleracaoX = 0;
                     break;
                 case "ArrowRight":
                     velX = 0;
+                    aceleracaoX = 0;
                     break;
             }
         }
