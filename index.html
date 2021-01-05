@@ -18,6 +18,7 @@
         let velX = 0;
         let y = 150;
         let velY = 0;
+        const velocidade = 100;
         let t0;
         let deltaTime;
         requestAnimationFrame(desenha);
@@ -56,16 +57,16 @@
             {
                 //Adiciona controle de velocidades 
                 case "ArrowUp":
-                    velY = -20;
+                    velY = -velocidade;
                     break;
                 case "ArrowDown":
-                    velY = +20;
+                    velY = +velocidade;
                     break;
                 case "ArrowLeft":
-                    velX = -20;
+                    velX = -velocidade;
                     break;
                 case "ArrowRight":
-                    velX = +20;
+                    velX = +velocidade;
                     break;
             }
         }
