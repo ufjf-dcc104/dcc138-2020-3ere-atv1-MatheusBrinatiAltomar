@@ -35,7 +35,8 @@
             aceleracaoY : 0,
             cor : "red",
             desenhar : desenharElemento,
-            mover : moverElemento
+            mover : moverElemento,
+            controlar : perseguirAlvo
         }
         
 
@@ -53,8 +54,7 @@
             contexto.fillRect(0, 0, canvas.width, canvas.height);
 
             //Controladores
-            enemy.aceleracaoY = 0.5*(player.y - enemy.y) - 0.2*(enemy.velY);
-            enemy.aceleracaoX = 0.5*(player.x - enemy.x) - 0.2*(enemy.velX);
+            enemy.controlar(player);
 
             //Atualiza dinâmica dos estado
             player.mover();
@@ -84,6 +84,18 @@
         {
             contexto.fillStyle = this.cor;
             contexto.fillRect(this.x, this.y, 20, 20);
+        }
+
+        function perseguirAlvo(alvo)
+        {
+            this.aceleracaoY = 0.5*(alvo.y - this.y) - 0.2*(this.velY);
+            this.aceleracaoX = 0.5*(alvo.x - this.x) - 0.2*(this.velX);
+        }
+
+        function evitarAlvo(alvo)
+        {
+            this.aceleracaoY = -0.5*(alvo.y - this.y) - 0.2*(this.velY);
+            this.aceleracaoX = -0.5*(alvo.x - this.x) - 0.2*(this.velX);
         }
 
         addEventListener("keydown", teclaPressionada);
