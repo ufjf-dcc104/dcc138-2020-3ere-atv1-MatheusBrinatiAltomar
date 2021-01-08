@@ -20,7 +20,12 @@
             aceleracaoX : 0,
             y : 150,
             velY : 0,
-            aceleracaoY : 0
+            aceleracaoY : 0,
+            desenhar : function()
+            {
+                contexto.fillStyle = "white";
+                contexto.fillRect(this.x, this.y, 20, 20);
+            }
         };
         
         let enemy = {
@@ -30,6 +35,11 @@
             y : 200,
             velY : 0,
             aceleracaoY : 0,
+            desenhar : function()
+            {
+                contexto.fillStyle = "red";
+                contexto.fillRect(this.x, this.y, 20, 20);
+            }
         }
         
 
@@ -69,12 +79,8 @@
                 player.y = 150;
 
             //Desenha Elementos
-            contexto.fillStyle = "white";
-            contexto.fillRect(player.x, player.y, 20, 20);
-
-            contexto.fillStyle = "red";
-            contexto.fillRect(enemy.x, enemy.y, 20, 20);
-
+            player.desenhar();
+            enemy.desenhar();
             requestAnimationFrame(desenha);
             t0 = t;
         }
@@ -108,19 +114,15 @@
             {
                 //Adiciona controle de velocidades 
                 case "ArrowUp":
-                    player.velY = 0;
                     player.aceleracaoY = 0;
                     break;
                 case "ArrowDown":
-                    player.velY = 0;
                     player.aceleracaoY = 0;
                     break;
                 case "ArrowLeft":
-                    player.velX = 0;
                     player.aceleracaoX = 0;
                     break;
                 case "ArrowRight":
-                    player.velX = 0;
                     player.aceleracaoX = 0;
                     break;
             }
