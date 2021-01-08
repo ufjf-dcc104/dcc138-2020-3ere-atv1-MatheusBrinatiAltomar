@@ -14,12 +14,15 @@
         let contexto = canvas.getContext("2d");
         canvas.width = 640;
         canvas.height = 480;
-        let x = 100;
-        let velX = 0;
-        let aceleracaoX = 0;
-        let y = 150;
-        let velY = 0;
-        let aceleracaoY = 0;
+        let player = {
+            x : 100,
+            velX : 0,
+            aceleracaoX : 0,
+            y : 150,
+            velY : 0,
+            aceleracaoY : 0
+        };
+        
 
         let o_x = 300;
         let o_velX = 0;
@@ -42,15 +45,15 @@
             contexto.fillRect(0, 0, canvas.width, canvas.height);
 
             //Controladores
-            o_aceleracaoY = 0.5*(y - o_y) - 0.2*(o_velY);
-            o_aceleracaoX = 0.5*(x - o_x) - 0.2*(o_velX);
+            o_aceleracaoY = 0.5*(player.y - o_y) - 0.2*(o_velY);
+            o_aceleracaoX = 0.5*(player.x - o_x) - 0.2*(o_velX);
 
             //Atualiza dinâmica dos estado
-            velX = velX + aceleracaoX*deltaTime;
-            x = x + velX*deltaTime;
+            player.velX = player.velX + player.aceleracaoX*deltaTime;
+            player.x = player.x + player.velX*deltaTime;
             
-            velY = velY + aceleracaoY*deltaTime;
-            y = y + velY*deltaTime;
+            player.velY = player.velY + player.aceleracaoY*deltaTime;
+            player.y = player.y + player.velY*deltaTime;
 
             o_velX = o_velX + o_aceleracaoX*deltaTime;
             o_x = o_x + o_velX*deltaTime;
@@ -58,14 +61,14 @@
             o_velY = o_velY + o_aceleracaoY*deltaTime;
             o_y = o_y + o_velY*deltaTime;
             
-            if(x > canvas.width || x < 0)
-                x = 100;
-            if(y > canvas.height || y < 0)
-                y = 150;
+            if(player.x > canvas.width || player.x < 0)
+                player.x = 100;
+            if(player.y > canvas.height || player.y < 0)
+                player.y = 150;
 
             //Desenha Elementos
             contexto.fillStyle = "white";
-            contexto.fillRect(x, y, 20, 20);
+            contexto.fillRect(player.x, player.y, 20, 20);
 
             contexto.fillStyle = "red";
             contexto.fillRect(o_x, o_y, 20, 20);
@@ -83,16 +86,16 @@
             {
                 //Adiciona controle de velocidades 
                 case "ArrowUp":
-                    aceleracaoY = -velocidade;
+                    player.aceleracaoY = -velocidade;
                     break;
                 case "ArrowDown":
-                    aceleracaoY = +velocidade;
+                    player.aceleracaoY = +velocidade;
                     break;
                 case "ArrowLeft":
-                    aceleracaoX = -velocidade;
+                    player.aceleracaoX = -velocidade;
                     break;
                 case "ArrowRight":
-                    aceleracaoX = +velocidade;
+                    player.aceleracaoX = +velocidade;
                     break;
             }
         }
@@ -103,20 +106,20 @@
             {
                 //Adiciona controle de velocidades 
                 case "ArrowUp":
-                    velY = 0;
-                    aceleracaoY = 0;
+                    player.velY = 0;
+                    player.aceleracaoY = 0;
                     break;
                 case "ArrowDown":
-                    velY = 0;
-                    aceleracaoY = 0;
+                    player.velY = 0;
+                    player.aceleracaoY = 0;
                     break;
                 case "ArrowLeft":
-                    velX = 0;
-                    aceleracaoX = 0;
+                    player.velX = 0;
+                    player.aceleracaoX = 0;
                     break;
                 case "ArrowRight":
-                    velX = 0;
-                    aceleracaoX = 0;
+                    player.velX = 0;
+                    player.aceleracaoX = 0;
                     break;
             }
         }
