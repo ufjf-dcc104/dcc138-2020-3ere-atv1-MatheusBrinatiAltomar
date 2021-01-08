@@ -60,10 +60,12 @@
             player.mover();
             enemy.mover();
             
-            if(player.x > canvas.width || player.x < 0)
+            if(player.x > canvas.width || player.x < 0 || player.y > canvas.height || player.y < 0)
+            {
                 player.x = 100;
-            if(player.y > canvas.height || player.y < 0)
                 player.y = 150;
+            }
+                
 
             //Desenha Elementos
             player.desenhar();
