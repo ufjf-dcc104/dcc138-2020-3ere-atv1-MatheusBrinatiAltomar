@@ -23,13 +23,15 @@
             aceleracaoY : 0
         };
         
-
-        let o_x = 300;
-        let o_velX = 0;
-        let o_aceleracaoX = 0;
-        let o_y = 200;
-        let o_velY = 0;
-        let o_aceleracaoY = 0;
+        let enemy = {
+            x : 300,
+            velX : 0,
+            aceleracaoX : 0,
+            y : 200,
+            velY : 0,
+            aceleracaoY : 0,
+        }
+        
 
         const velocidade = 100;
         let t0;
@@ -45,8 +47,8 @@
             contexto.fillRect(0, 0, canvas.width, canvas.height);
 
             //Controladores
-            o_aceleracaoY = 0.5*(player.y - o_y) - 0.2*(o_velY);
-            o_aceleracaoX = 0.5*(player.x - o_x) - 0.2*(o_velX);
+            enemy.aceleracaoY = 0.5*(player.y - enemy.y) - 0.2*(enemy.velY);
+            enemy.aceleracaoX = 0.5*(player.x - enemy.x) - 0.2*(enemy.velX);
 
             //Atualiza dinâmica dos estado
             player.velX = player.velX + player.aceleracaoX*deltaTime;
@@ -55,11 +57,11 @@
             player.velY = player.velY + player.aceleracaoY*deltaTime;
             player.y = player.y + player.velY*deltaTime;
 
-            o_velX = o_velX + o_aceleracaoX*deltaTime;
-            o_x = o_x + o_velX*deltaTime;
+            enemy.velX = enemy.velX + enemy.aceleracaoX*deltaTime;
+            enemy.x = enemy.x + enemy.velX*deltaTime;
             
-            o_velY = o_velY + o_aceleracaoY*deltaTime;
-            o_y = o_y + o_velY*deltaTime;
+            enemy.velY = enemy.velY + enemy.aceleracaoY*deltaTime;
+            enemy.y = enemy.y + enemy.velY*deltaTime;
             
             if(player.x > canvas.width || player.x < 0)
                 player.x = 100;
@@ -71,7 +73,7 @@
             contexto.fillRect(player.x, player.y, 20, 20);
 
             contexto.fillStyle = "red";
-            contexto.fillRect(o_x, o_y, 20, 20);
+            contexto.fillRect(enemy.x, enemy.y, 20, 20);
 
             requestAnimationFrame(desenha);
             t0 = t;
