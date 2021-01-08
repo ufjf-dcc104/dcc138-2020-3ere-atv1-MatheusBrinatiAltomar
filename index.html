@@ -21,11 +21,9 @@
             y : 150,
             velY : 0,
             aceleracaoY : 0,
-            desenhar : function()
-            {
-                contexto.fillStyle = "white";
-                contexto.fillRect(this.x, this.y, 20, 20);
-            }
+            cor : "white",
+            desenhar : desenharElemento,
+            mover : moverElemento
         };
         
         let enemy = {
@@ -35,11 +33,9 @@
             y : 200,
             velY : 0,
             aceleracaoY : 0,
-            desenhar : function()
-            {
-                contexto.fillStyle = "red";
-                contexto.fillRect(this.x, this.y, 20, 20);
-            }
+            cor : "red",
+            desenhar : desenharElemento,
+            mover : moverElemento
         }
         
 
@@ -61,17 +57,8 @@
             enemy.aceleracaoX = 0.5*(player.x - enemy.x) - 0.2*(enemy.velX);
 
             //Atualiza dinâmica dos estado
-            player.velX = player.velX + player.aceleracaoX*deltaTime;
-            player.x = player.x + player.velX*deltaTime;
-            
-            player.velY = player.velY + player.aceleracaoY*deltaTime;
-            player.y = player.y + player.velY*deltaTime;
-
-            enemy.velX = enemy.velX + enemy.aceleracaoX*deltaTime;
-            enemy.x = enemy.x + enemy.velX*deltaTime;
-            
-            enemy.velY = enemy.velY + enemy.aceleracaoY*deltaTime;
-            enemy.y = enemy.y + enemy.velY*deltaTime;
+            player.mover();
+            enemy.mover();
             
             if(player.x > canvas.width || player.x < 0)
                 player.x = 100;
@@ -85,6 +72,20 @@
             t0 = t;
         }
         
+        function moverElemento()
+        {
+            this.velX = this.velX + this.aceleracaoX*deltaTime;
+            this.x = this.x + this.velX*deltaTime;
+            this.velY = this.velY + this.aceleracaoY*deltaTime;
+            this.y = this.y + this.velY*deltaTime;
+        }
+
+        function desenharElemento()
+        {
+            contexto.fillStyle = this.cor;
+            contexto.fillRect(this.x, this.y, 20, 20);
+        }
+
         addEventListener("keydown", teclaPressionada);
         addEventListener("keyup", teclaSolta);
 
