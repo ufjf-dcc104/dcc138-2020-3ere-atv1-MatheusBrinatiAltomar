@@ -45,6 +45,26 @@
             
         }
 
+        let object = {
+            x : -1000,
+            velX : 0,
+            aceleracaoX : 0,
+            y : 150,
+            velY : 0,
+            aceleracaoY : 0,
+            cor : "green",
+            desenhar : desenharElemento,
+            mover : moverElemento,
+            controlar : function()
+            {
+                if (this.x > canvas.width + 60) {
+                    this.x = -1000;
+                    this.aceleracaoX = 0;
+                    this.velX = 0;
+                }
+            }
+        };
+        sprites.push(object);
 
         const velocidade = 100;
         let t0;
@@ -67,9 +87,9 @@
                 const sprite = sprites[s];
                 
                 //Controladores
-                sprite.controlar(player);
+                sprite.controlar?.(player);
                 //Atualiza dinâmica dos estado
-                sprite.mover();
+                sprite.mover?.();
                 //Desenha Elementos
                 sprite.desenhar();
             }
@@ -150,6 +170,14 @@
                 case "ArrowRight":
                     player.aceleracaoX = 0;
                     break;
+                case " ":
+                    if (object.x === -1000) 
+                    {    
+                        object.x = player.x;
+                        object.y = player.y;
+                        object.velX = 200;
+                        object.aceleracaoX = 100;  
+                    }
             }
         }
     </script>
