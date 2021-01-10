@@ -26,19 +26,25 @@
             mover : moverElemento
         };
         
-        let enemy = {
-            x : 300,
-            velX : 0,
-            aceleracaoX : 0,
-            y : 200,
-            velY : 0,
-            aceleracaoY : 0,
-            cor : "red",
-            desenhar : desenharElemento,
-            mover : moverElemento,
-            controlar : perseguirAlvo
+        const sprites = [];
+        for (let ne = 0; ne < 20; ne++) 
+        {
+            let enemy = {
+                x : canvas.width * Math.random(),
+                velX : 0,
+                aceleracaoX : 0,
+                y : canvas.height * Math.random(),
+                velY : 0,
+                aceleracaoY : 0,
+                cor : "red",
+                desenhar : desenharElemento,
+                mover : moverElemento,
+                controlar : perseguirAlvo
+            };
+            sprites.push(enemy);
+            
         }
-        
+
 
         const velocidade = 100;
         let t0;
@@ -52,24 +58,28 @@
             //Desenha Fundo
             contexto.fillStyle = "cyan";
             contexto.fillRect(0, 0, canvas.width, canvas.height);
-
-            //Controladores
-            enemy.controlar(player);
-
-            //Atualiza dinâmica dos estado
+            
             player.mover();
-            enemy.mover();
+            player.desenhar();
+           
+            for (let s = 0; s < sprites.length; s++) 
+            {
+                const sprite = sprites[s];
+                
+                //Controladores
+                sprite.controlar(player);
+                //Atualiza dinâmica dos estado
+                sprite.mover();
+                //Desenha Elementos
+                sprite.desenhar();
+            }
             
             if(player.x > canvas.width || player.x < 0 || player.y > canvas.height || player.y < 0)
             {
                 player.x = 100;
                 player.y = 150;
             }
-                
 
-            //Desenha Elementos
-            player.desenhar();
-            enemy.desenhar();
             requestAnimationFrame(desenha);
             t0 = t;
         }
