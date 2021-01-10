@@ -23,6 +23,8 @@
             y : 150,
             velY : 0,
             aceleracaoY : 0,
+            w : 40,
+            h : 15,
             cor : "white",
             desenhar : desenharElemento,
             mover : moverElemento
@@ -38,6 +40,8 @@
                 y : canvas.height * Math.random(),
                 velY : 0,
                 aceleracaoY : 0,
+                w : 15,
+                h : 15,
                 cor : "red",
                 desenhar : desenharElemento,
                 mover : moverElemento,
@@ -54,6 +58,8 @@
             y : 150,
             velY : 0,
             aceleracaoY : 0,
+            w : 5,
+            h : 5,
             cor : "green",
             desenhar : desenharElemento,
             mover : moverElemento,
@@ -82,8 +88,7 @@
             contexto.fillRect(0, 0, canvas.width, canvas.height);
             
             player.mover();
-            player.desenhar();
-           
+            
             for (let s = 0; s < sprites.length; s++) 
             {
                 const sprite = sprites[s];
@@ -94,35 +99,38 @@
                 sprite.mover?.();
                 //Desenha Elementos
                 sprite.desenhar();
-
+                
                 if (colidiram(object, sprite) && object !== sprite)
                 {
                     object.x = -1000;
                     object.y = -1000;
                     object.velX = 0;
                     object.aceleracaoX = 0;
-
+                    
                     sprite.x = 1000;
                     sprite.velX = 100;
                     sprite.aceleracaoX = 0;
-
+                    
                     pontos++;
                 }
-
+                
                 if (colidiram(player, sprite) && object !== sprite)
                 {
                     sprite.x = 1000;
                     sprite.velX = 100;
                     sprite.aceleracaoX = 0;
-
+                    
                     pontos -= 3;
                 }
             }
+            player.desenhar();
+
+            
             contexto.fillStyle = "yellow";
             contexto.font = "20px Impact";
             contexto.fillText(pontos, 10, 30);
-
-
+            
+            
             if(player.x > canvas.width || player.x < 0 || player.y > canvas.height || player.y < 0)
             {
                 player.x = 100;
@@ -144,7 +152,7 @@
         function desenharElemento()
         {
             contexto.fillStyle = this.cor;
-            contexto.fillRect(this.x, this.y, 20, 20);
+            contexto.fillRect(this.x, this.y, this.w, this.h);
         }
 
         function perseguirAlvo(alvo)
@@ -213,10 +221,10 @@
         function colidiram(A, B)
         {
             return !(
-                (A.x > B.x + 20)
-                || (A.x + 20 < B.x)
-                || (A.y > B.y + 20)
-                || (A.y + 20 < B.y)
+                (A.x > B.x + B.w)
+                || (A.x + A.w < B.x)
+                || (A.y > B.y + B.h)
+                || (A.y + A.h < B.y)
             );    
         }
 
