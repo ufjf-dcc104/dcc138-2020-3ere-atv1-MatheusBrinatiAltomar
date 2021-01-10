@@ -30,8 +30,8 @@
         for (let ne = 0; ne < 20; ne++) 
         {
             let enemy = {
-                x : canvas.width * Math.random(),
-                velX : 0,
+                x : canvas.width * (1 + 10*Math.random()),
+                velX : -20,
                 aceleracaoX : 0,
                 y : canvas.height * Math.random(),
                 velY : 0,
@@ -120,8 +120,8 @@
 
         function perseguirAlvo(alvo)
         {
-            this.aceleracaoY = 0.5*(alvo.y - this.y) - 0.2*(this.velY);
-            this.aceleracaoX = 0.5*(alvo.x - this.x) - 0.2*(this.velX);
+            this.aceleracaoY = 100 * Math.sign(alvo.y - this.y) - 0.2*(this.velY);
+            this.aceleracaoX = 100 * Math.sign(alvo.x - this.x) - 0.2*(this.velX);
         }
 
         function evitarAlvo(alvo)
